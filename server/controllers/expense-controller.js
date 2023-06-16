@@ -57,6 +57,9 @@ exports.editExpense = async (req, res) => {
   try {
     const id = req.params.id;
     const response = await Expense.findById(id);
+    const totalExpense = Number(req.user.totalExpenses) - Number(response.amount);
+    const user = await User.findById(req.user.id);
+    await user.updateOne({ totalExpenses: totalExpense });
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: "Error while calling editExpense Api" });
@@ -74,7 +77,10 @@ exports.updateExpense = async (req, res) => {
     response.amount = updatedAmount;
     response.category = updatedCategory;
     response.description = updatedDescription;
-    response.save( { userId: req.user.id } );
+    response.save({ userId: req.user.id });
+    const totalExpense = Number(req.user.totalExpenses) + Number(updatedAmount);
+    const user = await User.findById(req.user.id);
+    await user.updateOne({ totalExpenses: totalExpense });
     res.status(201).json(response);
   } catch (error) {
     res.status(400).json({ error: "Error while calling updateExpense Api" });

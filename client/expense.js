@@ -89,14 +89,14 @@ const getExpense = async (page) => {
       headers: { Authorization: token },
     });
 
-    if (response1.data.ispremiumuser == true) {
+    if (response1.data.isPremiumUser == true) {
       document.getElementById("premium").style.display = "none";
       document.getElementById("pUser").textContent = "You are a Premium User";
       document.getElementById("leaderBoard").style.display = "inline-block";
       document.getElementById("downloadExpense").style.display = "inline-block";
       document.getElementById("leaderHeading").textContent = "Leader Board";
       document.getElementById("downloadFiles").textContent = "Downloaded Files";
-      // showLeaderBoard();
+      showLeaderBoard();
       // downloadFiles();
     }
   } catch (error) {
@@ -226,7 +226,7 @@ const buyPremium = async () => {
       let response1 = await axios.get("http://localhost:8000/user/allusers", {
         headers: { Authorization: token },
       });
-      if (response1.data.ispremiumuser == true) {
+      if (response1.data.isPremiumUser == true) {
         document.getElementById("premium").style.display = "none";
         document.getElementById("pUser").textContent = "You are a Premium User";
         document.getElementById("leaderBoard").style.display = "inline-block";

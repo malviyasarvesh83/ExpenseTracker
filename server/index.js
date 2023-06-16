@@ -9,6 +9,9 @@ const Expense = require('./models/expense');
 
 const userRoutes = require('./routes/userRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
+const purchaseRoutes = require('./routes/purchaseRoutes');
+const premiumFeatureRoutes = require('./routes/premiumFeatureRoutes');
+const forgotPasswordRoutes = require('./routes/forgotPasswordRoutes');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,3 +28,6 @@ app.listen(port, () => {
 // Routes
 app.use('/user', userRoutes);
 app.use('/', expenseRoutes);
+app.use('/purchase', purchaseRoutes);
+app.use('/premium', premiumFeatureRoutes);
+app.use('/password', forgotPasswordRoutes);
